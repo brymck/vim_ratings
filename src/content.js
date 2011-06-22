@@ -90,7 +90,7 @@ var VimRatings = (function() {
       var $rating = $("td:contains('Rating')", $karma);
       var text = $rating.text();
       var numbers = [];
-      var re = /\d+/g;
+      var re = /-?\d+/g;
       var match;
       while (match = re.exec(text)) {
         numbers.push(match);
