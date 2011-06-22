@@ -12,9 +12,8 @@ Chrome Web Store.
 
     git clone http://github.com/bryanmckelvey/vim_ratings
     cd vim_ratings
-    %AppData%\..\Local\Google\Chrome\Application\chrome.exe ^
-      --pack-extension=%cd%\src ^
-      --pack-extension-key=%cd%\vimratings.pem ^
+    "%AppData%\..\Local\Google\Chrome\Application\chrome.exe" ^
+      --pack-extension="%cd%\src" ^
       --no-message-box
     copy /y src.crx vimratings.crx
     del src.crx
