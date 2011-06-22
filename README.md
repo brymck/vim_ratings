@@ -17,7 +17,7 @@ Chrome Web Store.
       --no-message-box
     copy /y src.crx vimratings.crx
     del src.crx
-    %AppData%\..\Local\Google\Chrome\Application\chrome.exe ^
+    "%AppData%\..\Local\Google\Chrome\Application\chrome.exe" ^
       "%cd%\vimratings.crx"
     
 
