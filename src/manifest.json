@@ -1,0 +1,11 @@
+{
+  "name": "vim_ratings",
+  "version": "0.5",
+  "description": "Show additional rating metrics for vim plugins at vim.org",
+  "content_scripts": [
+    {
+      "matches": ["http://www.vim.org/*"],
+      "js": ["jquery-1.6.1.min.js", "content.js"]
+    }
+  ]
+}
