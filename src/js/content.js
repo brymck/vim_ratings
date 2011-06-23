@@ -1,6 +1,11 @@
 var VimRatings = (function() {
   var RPD_DECIMALS = 3;
+  var RPD_MIN = -0.05;
+  var RPD_MAX = 0.25;
+
   var RPR_DECIMALS = 2;
+  var RPR_MIN = -1;
+  var RPR_MAX = 4;
 
   function stripTags(str) {
     return str.replace(/<[^>]+>/g, "");
@@ -8,6 +13,15 @@ var VimRatings = (function() {
 
   function colspan($node) {
     return parseInt($node.attr("colspan") || 1);
+  }
+
+  function getColor(value, decimals, min, max, tag) {
+    var html = "<" + tag;
+    if (xlcs) {
+      html += " style='background-color:" + xlcs.convert(value, min, max) + "'";
+    }
+    html += ">" + value.toFixed(decimals) + "</" + tag + ">";
+    return html;
   }
 
   function matchUrl(search) {
@@ -39,7 +53,6 @@ var VimRatings = (function() {
         }
       });
 
-      // Place new ratings/download column after both have appeared
       var isOddRow = true;
 
       $("tr", $results).each(function(i, tr) {
@@ -48,6 +61,7 @@ var VimRatings = (function() {
         var rating;
         var downloads;
         var $lastTd;
+        var scriptId;
         var counter = 0;
         var $rpd;
 
@@ -70,16 +84,22 @@ var VimRatings = (function() {
         });
 
         if (typeof $tds.eq(0).attr("colspan") !== "undefined") {
-          $rpd = $("<td>");
+          $lastTd.after($("<td>")).after($("<td>"));
         } else if ($tr.hasClass("tableheader")) {
-            $rpd = $("<th>").html("Rating/<br>Download");
+          $lastTd.after($("<th>").html("Rating/<br>Download"))
+                 .after($("<th>").html("Average<br>Rating"));
         } else {
-          $rpd = $("<td>").addClass(isOddRow ? "rowodd" : "roweven").attr("align", "right")
-            .text((rating / downloads).toFixed(RPD_DECIMALS));
+          scriptId = $("a:first", $tr).attr("href").match(/script_id=(\d+)/)[1];
+          $lastTd.after($(getColor(rating / downloads, RPD_DECIMALS, RPD_MIN, RPD_MAX, "td")).attr("align", "right"))
+                 .after($("<td>").addClass(isOddRow ? "rowodd" : "roweven"));
+          $.get("http://www.vim.org/scripts/script.php", { script_id: scriptId }, function(data) {
+            var numbers = data.match(/<b>(\d+)\/(\d+)<\/b>/);
+            $lastTd.next("td").replaceWith(
+              $(getColor(parseInt(numbers[1], 10) / parseInt(numbers[2], 10), RPR_DECIMALS, RPR_MIN, RPR_MAX, "td")).attr("align", "right")
+            );
+          });
           isOddRow = !isOddRow;
         }
-        
-        $lastTd.after($rpd);
       });
     }
   }
@@ -95,8 +115,8 @@ var VimRatings = (function() {
       while (match = re.exec(text)) {
         numbers.push(match);
       }
-      $rating.html($rating.html().replace(",", " (" + (numbers[0] / numbers[1]).toFixed(RPR_DECIMALS) + "),") +
-                                               " (" + (numbers[0] / numbers[2]).toFixed(RPD_DECIMALS) + ")"); 
+      $rating.html($rating.html().replace(",", " (" + getColor(numbers[0] / numbers[1], RPD_DECIMALS, RPD_MIN, RPD_MAX, "span") + "),") +
+                                               " (" + getColor(numbers[0] / numbers[2], RPR_DECIMALS, RPR_MIN, RPR_MAX, "span") + ")"); 
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "vim_ratings",
-  "version": "0.5",
+  "version": "0.8",
   "description": "Show additional rating metrics for vim plugins at vim.org",
   "icons": {
     "16": "img/icon_16.png",
@@ -10,7 +10,11 @@
   "content_scripts": [
     {
       "matches": ["http://www.vim.org/*"],
-      "js": ["js/jquery-1.6.1.min.js", "js/content.js"]
+      "js": [
+        "js/jquery-1.6.1.min.js",
+        "js/xlcolorscale-0.5.min.js",
+        "js/content.js"
+      ]
     }
   ]
 }
