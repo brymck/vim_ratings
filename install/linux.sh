@@ -8,7 +8,7 @@ else
   /opt/google/chrome/chrome --pack-extension="${PWD}/src" --no-message-box;
 fi
 
-echo "Renaming Chrome extension and private key"
+echo "Renaming Chrome extension and private key..."
 if [ -f "src.pem" ]; then
   mv src.pem vim_ratings.pem;
 fi
