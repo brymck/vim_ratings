@@ -7,11 +7,11 @@ set counter=0
 :test
 if exist "src.crx" goto finish
 set /a counter+=1
-if counter==10 goto error
+if %counter%==10 goto error
 goto wait
 
 :wait
-ping 127.0.0.1 -n 1
+ping 127.0.0.1 -n 1 -w 1000 > nul
 goto test
 
 :error
