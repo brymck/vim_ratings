@@ -24,4 +24,4 @@ latest version, use the following:
 
     git clone http://github.com/brymck/vim_ratings
     cd vim_ratings
-    install\linux
+    install/linux.sh
