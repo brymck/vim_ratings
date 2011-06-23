@@ -1,7 +1,7 @@
 @echo off
 echo Packing into Chrome extension ...
 set counter=0
-if exist windows.bat cd ..
+cd %~dp0\..
 if exist vim_ratings.pem (
   "%AppData%\..\Local\Google\Chrome\Application\chrome.exe" --pack-extension="%cd%\src" --pack-extension-key="%cd%\vim_ratings.pem" --no-message-box
   goto test
