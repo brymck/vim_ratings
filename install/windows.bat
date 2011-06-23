@@ -31,7 +31,7 @@ if exist src.pem (
 )
 
 echo Opening in Chrome...
-"%AppData%\..\Local\Google\Chrome\Application\chrome.exe" "%cd%\vimratings.crx"
+"%AppData%\..\Local\Google\Chrome\Application\chrome.exe" "%cd%\vim_ratings.crx"
 echo Done!
 
 :exit
