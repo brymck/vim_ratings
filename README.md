@@ -11,6 +11,6 @@ Chrome Web Store.
 ### Windows
 
     git clone http://github.com/bryanmckelvey/vim_ratings
-    vim_ratings\windows_install
+    vim_ratings\install\windows
 
 ### Linux
