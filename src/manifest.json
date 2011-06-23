@@ -1,7 +1,7 @@
 {
   "name": "vim_ratings",
   "version": "0.8",
-  "description": "Show additional rating metrics for vim plugins at vim.org",
+  "description": "Show and color-code average rating and rating per download for vim plugins at vim.org",
   "icons": {
     "16": "img/icon_16.png",
     "48": "img/icon_48.png",

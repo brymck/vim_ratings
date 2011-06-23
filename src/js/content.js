@@ -1,11 +1,17 @@
 var VimRatings = (function() {
-  var RPD_DECIMALS = 3;
-  var RPD_MIN = -0.05;
-  var RPD_MAX = 0.25;
+  var R_MIN = 0;
+  var R_MAX = 1000;
+
+  var DL_MIN = 0;
+  var DL_MAX = 10000;
 
   var RPR_DECIMALS = 2;
   var RPR_MIN = -1;
   var RPR_MAX = 4;
+
+  var RPD_DECIMALS = 3;
+  var RPD_MIN = -0.05;
+  var RPD_MAX = 0.25;
 
   function stripTags(str) {
     return str.replace(/<[^>]+>/g, "");
@@ -90,12 +96,15 @@ var VimRatings = (function() {
                  .after($("<th>").html("Average<br>Rating"));
         } else {
           scriptId = $("a:first", $tr).attr("href").match(/script_id=(\d+)/)[1];
+          $tds.eq(ratingCol - 1).css("backgroundColor", xlcs.convert(rating, R_MIN, R_MAX));
+          $tds.eq(downloadsCol - 1).css("backgroundColor", xlcs.convert(downloads, DL_MIN, DL_MAX));
           $lastTd.after($(getColor(rating / downloads, RPD_DECIMALS, RPD_MIN, RPD_MAX, "td")).attr("align", "right"))
                  .after($("<td>").addClass(isOddRow ? "rowodd" : "roweven"));
           $.get("http://www.vim.org/scripts/script.php", { script_id: scriptId }, function(data) {
-            var numbers = data.match(/<b>(\d+)\/(\d+)<\/b>/);
+            var numbers = data.match(/<b>(-?\d+)\/(\d+)<\/b>/);
+            var rpr = (numbers[1] === "0" ? 0 : parseInt(numbers[1], 10) / parseInt(numbers[2], 10));
             $lastTd.next("td").replaceWith(
-              $(getColor(parseInt(numbers[1], 10) / parseInt(numbers[2], 10), RPR_DECIMALS, RPR_MIN, RPR_MAX, "td")).attr("align", "right")
+              $(getColor(rpr, RPR_DECIMALS, RPR_MIN, RPR_MAX, "td")).attr("align", "right")
             );
           });
           isOddRow = !isOddRow;
