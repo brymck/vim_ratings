@@ -20,4 +20,8 @@ latest version, use the following:
     cd vim_ratings
     install\windows
 
-### Linux
+### Linux (tested on Ubuntu)
+
+    git clone http://github.com/brymck/vim_ratings
+    cd vim_ratings
+    install\linux
