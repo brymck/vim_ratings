@@ -10,7 +10,7 @@ Chrome Web Store.
 
 ### Windows
 
-    git clone http://github.com/bryanmckelvey/vim_ratings
+    git clone http://github.com/brymck/vim_ratings
     cd vim_ratings
     install\windows
 
