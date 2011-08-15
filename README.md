@@ -1,6 +1,10 @@
-README
-======
+vim ratings
+===========
 
+Adds color codes and a few additional metrics to the search results and script
+pages at vim.org, making it a little easier to figure out which new scripts
+might be worth a try. The minimum and maximum for the color scale of each
+metric can be configured on the options page.
 
 Installation
 ------------
@@ -12,17 +16,14 @@ A packed, unstable version will always be available via the
 [Downloads](https://github.com/brymck/vim_ratings/archives/master) link above.
 
 If you'd like to pack it from the source by yourself to ensure you have the
-latest version, use the following:
+latest version, it requires the following
 
-### Windows
+* [Ruby 1.9+](http://www.ruby-lang.org/en/)
+  * [HAML](http://haml-lang.com/)
+* [Node.js](http://nodejs.org/)
+  * [CoffeeScript](http://jashkenas.github.com/coffee-script/)
 
-    git clone http://github.com/brymck/vim_ratings
-    cd vim_ratings
-    install\windows
+If those are installed, you can just clone the repo and run `rake`:
 
-### Linux (tested on Ubuntu)
-
-    git clone http://github.com/brymck/vim_ratings
-    cd vim_ratings
-    chmod a+x install/linux.sh
-    install/linux.sh
+    git clone git://github.com/brymck/vim_ratings.git
+    rake
