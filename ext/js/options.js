@@ -2,17 +2,19 @@
   var Options, options;
   Options = (function() {
     function Options() {
-      var $form, bg, key;
+      var $form, bg, key, value, _ref;
       bg = chrome.extension.getBackgroundPage();
       $form = $("#options_form");
-      for (key in bg.background.options()) {
-        $form.find("input[name=" + key + "]").val(key);
+      _ref = bg.background.options;
+      for (key in _ref) {
+        value = _ref[key];
+        $form.find("input[name=" + key + "]").val(value);
       }
       $form.submit(function() {
-        var $input, input, value, _i, _len, _ref;
-        _ref = $form.find("input[type=text]");
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          input = _ref[_i];
+        var $input, input, _i, _len, _ref2;
+        _ref2 = $form.find("input[type=text]");
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          input = _ref2[_i];
           $input = $(input);
           key = $input.attr("name");
           value = $input.val();

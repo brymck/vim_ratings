@@ -20,6 +20,7 @@ task :build do
   Rake::Task[:lib].invoke
   Rake::Task[:img].invoke
   Rake::Task[:coffee].invoke
+  Rake::Task[:scss].invoke
   Rake::Task[:haml].invoke
   puts "\nDone!"
   puts
@@ -68,6 +69,18 @@ end
 task :manifest do
   puts "----> Copying manifest"
   FileUtils.copy "src/manifest.json", "ext"
+end
+
+task :scss do
+  check_tree "ext", "css"
+  puts "----> Converting SCSS to CSS"
+  Dir.entries("./src/scss/").each do |entry|
+    unless top_level?(entry)
+      puts "      #{entry}"
+      result = %x[sass --no-cache src/scss/#{entry} ext/css/#{entry.gsub /\.scss$/, ".css"}] 
+      puts result unless result.empty?
+    end
+  end
 end
 
 task :vendor do
