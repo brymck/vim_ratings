@@ -1,0 +1,32 @@
+- OPTIONS = [
+-   { name: "Rating", abbr: "r", has_dec: false },
+    { name: "Downloads", abbr: "dl", has_dec: false },
+    { name: "Average Rating", abbr: "rpr", has_dec: true },
+    { name: "Rating/Download", abbr: "rpd", has_dec: true }
+- ]
+!!! 5
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %title Vim Ratings Options
+  %body
+    %h1 Vim Ratings Options
+    %form#options_form
+      %table
+        %thead
+          %tr
+            - %w(metric minimum maximum decimals).each do |metric|
+              %th= metric.capitalize
+        %tbody
+          - OPTIONS.each do |option|
+            %tr
+              %td= option[:name]
+              - %w(min max dec).each do |level|
+                %td<
+                  - if level != "dec" || option[:has_dec]
+                    %input{type: "text", name: "#{option[:abbr]}#{level.capitalize}"}
+                  - else
+                    0
+      %input{type: "submit", value: "Save"}
+    %script{src: "/js/jquery-1.6.1.min.js", type: "text/javascript"}
+    %script{src: "/js/options.js", type: "text/javascript"}

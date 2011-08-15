@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Vim Ratings Options</title>
+  </head>
+  <body>
+    <h1>Vim Ratings Options</h1>
+    <form id='options_form'>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Minimum</th>
+            <th>Maximum</th>
+            <th>Decimals</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rating</td>
+            <td><input name='rMin' type='text'></td>
+            <td><input name='rMax' type='text'></td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Downloads</td>
+            <td><input name='dlMin' type='text'></td>
+            <td><input name='dlMax' type='text'></td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Average Rating</td>
+            <td><input name='rprMin' type='text'></td>
+            <td><input name='rprMax' type='text'></td>
+            <td><input name='rprDec' type='text'></td>
+          </tr>
+          <tr>
+            <td>Rating/Download</td>
+            <td><input name='rpdMin' type='text'></td>
+            <td><input name='rpdMax' type='text'></td>
+            <td><input name='rpdDec' type='text'></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type='submit' value='Save'>
+    </form>
+    <script src='/js/jquery-1.6.1.min.js' type='text/javascript'></script>
+    <script src='/js/options.js' type='text/javascript'></script>
+  </body>
+</html>
